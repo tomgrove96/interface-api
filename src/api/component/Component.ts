@@ -1,7 +1,9 @@
+import { IStringIndex } from "../interface/IStringIndex";
+
 export class Component {
   parent: Component | null = null;
-  children: { [key: string]: any } = {};
-  props: { [key: string]: any } = {};
+  children: IStringIndex = {};
+  props: IStringIndex = {};
 
   constructor(id: string) {
     this.props["id"] = id;

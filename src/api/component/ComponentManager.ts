@@ -1,5 +1,5 @@
 import { IStringIndex } from "../interface/IStringIndex";
-import { Component } from "../abstract/Component";
+import { Component } from "./Component";
 
 export class ComponentManager {
   private static instance: ComponentManager;
