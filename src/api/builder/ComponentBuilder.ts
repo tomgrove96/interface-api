@@ -1,7 +1,6 @@
 import { Component } from "../component/Component";
-import { RGBAColor } from "../color/RGBAColor";
-import { Vector2 } from "../math/Vector2";
-import { Vector4 } from "../math/Vector4";
+import { IVector } from "../interface/IVector";
+import { IColor } from "../interface/IColor";
 
 export class ComponentBuilder {
   private component: Component;
@@ -15,19 +14,19 @@ export class ComponentBuilder {
     return this;
   }
 
-  setSize(size: Vector2): ComponentBuilder {
+  setSize(size: IVector): ComponentBuilder {
     this.component.props["width"] = `${size.x}px`;
     this.component.props["height"] = `${size.y}px`;
     return this;
   }
 
-  setPosition(position: Vector2): ComponentBuilder {
+  setPosition(position: IVector): ComponentBuilder {
     this.component.props["left"] = `${position.x}px`;
     this.component.props["top"] = `${position.y}px`;
     return this;
   }
 
-  setPadding(padding: Vector4): ComponentBuilder {
+  setPadding(padding: IVector): ComponentBuilder {
     this.component.props["padding-top"] = `${padding.w}px`;
     this.component.props["padding-right"] = `${padding.x}px`;
     this.component.props["padding-bottom"] = `${padding.y}px`;
@@ -35,7 +34,7 @@ export class ComponentBuilder {
     return this;
   }
 
-  setMargin(margin: Vector4): ComponentBuilder {
+  setMargin(margin: IVector): ComponentBuilder {
     this.component.props["margin-top"] = `${margin.w}px`;
     this.component.props["margin-right"] = `${margin.x}px`;
     this.component.props["margin-bottom"] = `${margin.y}px`;
@@ -58,14 +57,19 @@ export class ComponentBuilder {
     return this;
   }
 
-  setFontColor(color: RGBAColor): ComponentBuilder {
+  setFontColor(color: IColor): ComponentBuilder {
     this.component.props[
       "color"
     ] = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
     return this;
   }
 
-  setBackgroundColor(color: RGBAColor): ComponentBuilder {
+  setTextAlign(align: string): ComponentBuilder {
+    this.component.props["text-align"] = align;
+    return this;
+  }
+
+  setBackgroundColor(color: IColor): ComponentBuilder {
     this.component.props[
       "background-color"
     ] = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;

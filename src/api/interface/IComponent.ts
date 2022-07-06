@@ -1,4 +1,8 @@
-import { Component } from "../component/Component";
+import { IStringIndex } from "./IStringIndex";
+
 export interface IComponent {
-  id: Component;
+  id: string;
+  parent: IComponent | null;
+  children: IStringIndex;
+  props: IStringIndex;
 }
