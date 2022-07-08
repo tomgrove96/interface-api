@@ -8,8 +8,9 @@ export class Component implements IComponent {
   children: IStringIndex = {};
   props: IStringIndex = {};
 
-  constructor(id: string) {
+  constructor(id: string, parent?: Component) {
     this.id = id;
+    if (parent) this.parent = parent;
   }
 
   private addProps() {

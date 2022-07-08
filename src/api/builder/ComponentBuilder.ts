@@ -7,8 +7,8 @@ export class ComponentBuilder {
   private component: Component;
   private manager = ComponentManager.getInstance();
 
-  constructor(id: string) {
-    this.component = new Component(id);
+  constructor(id: string, parent?: Component) {
+    this.component = new Component(id, parent);
   }
 
   setValue(value: string): ComponentBuilder {
@@ -75,12 +75,6 @@ export class ComponentBuilder {
     this.component.props[
       "background-color"
     ] = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
-    return this;
-  }
-
-  add(component: Component): ComponentBuilder {
-    this.component.children[component.props.id] = component;
-    this.component.children[component.props.id].parent = this.component;
     return this;
   }
 
