@@ -1,9 +1,11 @@
+import { ComponentManager } from "../component/ComponentManager";
 import { Component } from "../component/Component";
 import { IVector } from "../interface/IVector";
 import { IColor } from "../interface/IColor";
 
 export class ComponentBuilder {
   private component: Component;
+  private manager = ComponentManager.getInstance();
 
   constructor(id: string) {
     this.component = new Component(id);
@@ -82,7 +84,9 @@ export class ComponentBuilder {
     return this;
   }
 
-  build(): Component {
-    return this.component;
+  build() {
+    this.component.parent
+      ? this.manager.addChild(this.component.parent, this.component)
+      : this.manager.addParent(this.component);
   }
 }
