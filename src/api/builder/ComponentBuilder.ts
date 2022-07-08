@@ -5,8 +5,8 @@ import { IColor } from "../interface/IColor";
 export class ComponentBuilder {
   private component: Component;
 
-  constructor(id: string, value?: string) {
-    this.component = new Component(id, value);
+  constructor(id: string) {
+    this.component = new Component(id);
   }
 
   setValue(value: string): ComponentBuilder {

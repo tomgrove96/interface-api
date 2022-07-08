@@ -8,10 +8,8 @@ export class ComponentManager {
 
   private constructor() {}
 
-  private buildComponent(component: Component): Component {
-    const parent = component.parent;
-
-    if (!parent) {
+  private buildComponent(component: Component) {
+    if (!component.parent) {
       document.body.insertAdjacentHTML("beforeend", component.getHTML());
     }
 
@@ -25,10 +23,9 @@ export class ComponentManager {
         this.buildComponent(child);
       }
     }
-    return component;
   }
 
-  private build() {
+  public build() {
     const entries = Object.entries(ComponentManager.components);
     for (let [key] of entries) {
       this.buildComponent(ComponentManager.components[key]);
@@ -42,15 +39,17 @@ export class ComponentManager {
         ComponentManager.components[key].children[component.id] = component;
       }
     }
-    this.build();
+    //this.build();
+    console.log("added child");
   }
 
   public addParent(component: Component) {
-    const key: string = component.props.id;
+    const key: string = component.id;
     if (!ComponentManager.components[key])
       ComponentManager.components[key] = component;
 
-    this.build();
+    //this.build();
+    console.log("added parent");
   }
 
   public getComponents() {
