@@ -4,7 +4,7 @@ import { IStringIndex } from "../interface/IStringIndex";
 export class Component implements IComponent {
   id = "";
   value = "";
-  parent = null;
+  parent: Component | null = null;
   children: IStringIndex = {};
   props: IStringIndex = {};
 
