@@ -10,7 +10,7 @@ export class DefaultText {
     this.builder = new ComponentBuilder(id, value);
     this.builder
       .setFontSize("32px")
-      .setFontColor({ r: 100, g: 0, b: 0 })
+      .setFontColor({ r: 100, g: 0, b: 0, a: 1 })
       .setSize({ x: window.innerWidth, y: 64 });
 
     parent

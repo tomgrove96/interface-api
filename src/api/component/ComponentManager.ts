@@ -28,7 +28,7 @@ export class ComponentManager {
     return component;
   }
 
-  public build() {
+  private build() {
     const entries = Object.entries(ComponentManager.components);
     for (let [key] of entries) {
       this.buildComponent(ComponentManager.components[key]);
@@ -42,12 +42,15 @@ export class ComponentManager {
         ComponentManager.components[key].children[component.id] = component;
       }
     }
+    this.build();
   }
 
   public addParent(component: Component) {
     const key: string = component.props.id;
     if (!ComponentManager.components[key])
       ComponentManager.components[key] = component;
+
+    this.build();
   }
 
   public getComponents() {
