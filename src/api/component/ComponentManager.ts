@@ -8,7 +8,7 @@ export class ComponentManager {
 
   private constructor() {}
 
-  public buildComponent(component: Component): Component {
+  private buildComponent(component: Component): Component {
     const parent = component.parent;
 
     if (!parent) {

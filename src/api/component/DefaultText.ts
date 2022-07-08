@@ -7,8 +7,8 @@ export class DefaultText {
   manager = ComponentManager.getInstance();
 
   constructor(id: string, value: string, parent?: Component) {
-    this.builder = new ComponentBuilder(id, value);
-    this.builder
+    this.builder = new ComponentBuilder(id)
+      .setValue(value)
       .setFontSize("32px")
       .setFontColor({ r: 100, g: 0, b: 0, a: 1 })
       .setSize({ x: window.innerWidth, y: 64 });
