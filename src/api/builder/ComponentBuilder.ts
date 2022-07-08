@@ -5,12 +5,12 @@ import { IColor } from "../interface/IColor";
 export class ComponentBuilder {
   private component: Component;
 
-  constructor(id: string) {
-    this.component = new Component(id);
+  constructor(id: string, value?: string) {
+    this.component = new Component(id, value);
   }
 
   setValue(value: string): ComponentBuilder {
-    this.component.props.value = value;
+    this.component.value = value;
     return this;
   }
 
@@ -82,7 +82,7 @@ export class ComponentBuilder {
     return this;
   }
 
-  getResult(): Component {
+  build(): Component {
     return this.component;
   }
 }

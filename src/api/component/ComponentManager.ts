@@ -8,7 +8,7 @@ export class ComponentManager {
 
   private constructor() {}
 
-  public build(component: Component): Component {
+  public buildComponent(component: Component): Component {
     const parent = component.parent;
 
     if (!parent) {
@@ -22,22 +22,32 @@ export class ComponentManager {
         const parentElement = document.getElementById(component.props.id);
         if (parentElement)
           parentElement.insertAdjacentHTML("beforeend", child.getHTML());
-        this.build(child);
+        this.buildComponent(child);
       }
     }
     return component;
   }
 
-  public add(component: Component) {
+  public build() {
+    const entries = Object.entries(ComponentManager.components);
+    for (let [key] of entries) {
+      this.buildComponent(ComponentManager.components[key]);
+    }
+  }
+
+  public addChild(parent: Component, component: Component) {
+    const entries = Object.entries(ComponentManager.components);
+    for (let [key] of entries) {
+      if (key === parent.id) {
+        ComponentManager.components[key].children[component.id] = component;
+      }
+    }
+  }
+
+  public addParent(component: Component) {
     const key: string = component.props.id;
     if (!ComponentManager.components[key])
       ComponentManager.components[key] = component;
-  }
-
-  public remove(component: Component) {
-    const key: string = component.props.id;
-    if (ComponentManager.components[key])
-      delete ComponentManager.components[key];
   }
 
   public getComponents() {

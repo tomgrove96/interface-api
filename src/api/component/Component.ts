@@ -3,20 +3,19 @@ import { IStringIndex } from "../interface/IStringIndex";
 
 export class Component implements IComponent {
   id = "";
+  value = "";
   parent = null;
   children: IStringIndex = {};
   props: IStringIndex = {};
 
-  constructor(id: string) {
-    this.props["id"] = id;
+  constructor(id: string, value?: string) {
+    this.id = id;
+    if (value) this.value = value;
   }
 
   private addProps() {
     let props = "";
     for (let [key, value] of Object.entries(this.props)) {
-      if (key === "id") continue;
-      if (key === "value") continue;
-
       props += value ? `${key}: ${value};` : "";
     }
     return props;
@@ -25,10 +24,10 @@ export class Component implements IComponent {
   public getHTML(): string {
     const html = `
 			<div
-				id="${this.props.id}"
+				id="${this.id}"
 				style="${this.addProps()}
 			">
-			${this.props.value ? this.props.value : ""}
+			${this.value.length > 0 ? this.value : ""}
 			</div>`;
     return html;
   }
