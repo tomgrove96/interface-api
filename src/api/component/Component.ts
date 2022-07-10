@@ -10,7 +10,7 @@ export class Component implements IComponent {
 
   constructor(id: string, parent?: Component) {
     this.id = id;
-    if (parent) this.parent = parent;
+    parent ? (this.parent = parent) : (this.parent = null);
   }
 
   private addProps() {

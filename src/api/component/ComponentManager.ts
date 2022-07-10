@@ -17,7 +17,7 @@ export class ComponentManager {
     if (childEntries.length > 0) {
       for (let [key] of childEntries) {
         const child = component.children[key];
-        const parentElement = document.getElementById(component.props.id);
+        const parentElement = document.getElementById(component.id);
         if (parentElement)
           parentElement.insertAdjacentHTML("beforeend", child.getHTML());
         this.buildComponent(child);
@@ -34,23 +34,30 @@ export class ComponentManager {
   }
 
   public addChild(parent: Component, component: Component) {
+    let build = false;
+    if (ComponentManager.components[component.id])
+      delete ComponentManager.components[component.id];
     const entries = Object.entries(ComponentManager.components);
     for (let [key] of entries) {
       if (key === parent.id) {
+        component.parent = parent;
         ComponentManager.components[key].children[component.id] = component;
+        build = true;
       }
     }
-    this.build();
-    console.log("added child");
+    if (build) {
+      this.build();
+      console.log("added child");
+    }
   }
 
   public addParent(component: Component) {
     const key: string = component.id;
-    if (!ComponentManager.components[key])
+    if (!ComponentManager.components[key]) {
       ComponentManager.components[key] = component;
-
-    this.build();
-    console.log("added parent");
+      this.build();
+      console.log("added parent");
+    }
   }
 
   public getComponents() {

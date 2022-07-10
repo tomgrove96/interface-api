@@ -7,8 +7,10 @@ export class ComponentBuilder {
   private component: Component;
   private manager = ComponentManager.getInstance();
 
-  constructor(id: string, parent?: Component) {
-    this.component = new Component(id, parent);
+  constructor(component: Component) {
+    component.parent
+      ? (this.component = new Component(component.id, component.parent))
+      : (this.component = new Component(component.id));
   }
 
   setValue(value: string): ComponentBuilder {
